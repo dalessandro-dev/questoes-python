@@ -1,156 +1,167 @@
-estoque_comida = {
-    "sanduiche": 5,
-    "bolo": 6,
-    "coxinha": 8,
-    "pastel": 10,
-    "biscoito": 12,
-    "pizza": 4,
-    "tapioca": 7,
-    "empada": 3,
-    "pão": 9,
-    "torta": 2
-}
-
-estoque_bebida = {
-    "refrigerante": 10,
-    "suco": 8,
-    "cafe": 15,
-    "agua": 20,
-    "achocolatado": 6,
-    "vitamina": 5,
-    "cha": 9,
-    "milkshake": 4,
-    "energetico": 3,
-    "leite": 10
-}
-
+estoque_comida = {"pastel": 10, "sanduíche": 8, "recheado": 2, "cachorro-quente": 1, "batata frita": 11, "maçã": 25, "lasanha": 12, "coxinha": 5, "bolo": 6, "tapioca": 1 }
+estoque_bebida = {"suco de caju": 10, "suco de manga": 10, "suco de maracujá": 4, "refrigerante": 2, "suco de goiaba": 5, "iorgute": 23, "água": 4, "vitamina de abacaxi": 5, "água de coco": 4, "achocolatado": 1}
 
 def mostrar_estoque():
-    """Mostra todos os produtos e suas quantidades."""
-    print("\nEstoque de comidas:")
-    for produto, quantidade in estoque_comida.items():
-        print(f"{produto}: {quantidade}")
-    print("\nEstoque de bebidas:")
-    for produto, quantidade in estoque_bebida.items():
-        print(f"{produto}: {quantidade}")
+  print("Estoque de comidas:\n")
+  for item, quantidade in estoque_comida.items():
+    print(f"{item}: {quantidade}")
+
+  print("\nEstoque de bebidas:\n")
+  for item, quantidade in estoque_bebida.items():
+    print(f"{item}: {quantidade}")
 
 
-def adicionar_produto(nome, quantidade):
-    """Adiciona um novo produto ao estoque ou soma à quantidade existente."""
-    global estoque_comida, estoque_bebida
 
-    tipo = input("O produto é (1) Comida ou (2) Bebida? ")
+def adicionar_produto(alimento, quantidade):
+    while True:
+        print("""
+1. Comida
+2. Bebida""")
 
-    if tipo == "1":
-        estoque = estoque_comida
-    elif tipo == "2":
-        estoque = estoque_bebida
+        try:
+            opcao = int(input("\nDigite a opção do tipo do produto: "))          
+            if (not opcao == 1) and (not opcao == 2):
+                print("Opção inválida. Tente novamente")
+                continue
+            break
+        except:
+            print("Opção inválida. Tente novamente.")
+            continue
+           
+    if opcao == 1:
+        estoque_comida[alimento] = quantidade
+
+        print("A comida foi adicionada com sucesso.")
+    elif opcao == 2:
+        estoque_bebida[alimento] = quantidade
+
+        print("A bebida foi adicionada com sucesso.")
     else:
-        print("Opção inválida.")
-        return
+       print("Erro")
 
-    if nome in estoque:
-        estoque[nome] += quantidade
-        print(f"Quantidade atualizada. Agora há {estoque[nome]} unidades de {nome}.")
+
+
+def remover_produto(alimento):
+    while True:
+        print("""
+1. Remover comida
+2. Remover bebida""")
+
+        try:
+            opcao = int(input("\nDigite uma das opções: "))        
+            if (not opcao == 1) and (not opcao == 2):
+                print("Opção inválida. Tente novamente")
+                continue
+            break
+        except:
+            print("Opção inválida. Tente novamente.")
+            continue
+         
+    if opcao == 1:
+        if alimento in estoque_comida:
+            del estoque_comida[alimento]
+            print("O alimento foi removido com sucesso.")
+        else:
+            print("O alimento não existe.")
+    elif opcao == 2:
+        if alimento in estoque_bebida:
+            del estoque_bebida[alimento]
+            print("A bebida foi removida com sucesso.")
+        else:
+            print("A bebida não existe.")
     else:
-        estoque[nome] = quantidade
-        print(f"Produto '{nome}' adicionado com {quantidade} unidades.")
+       print("Erro")
 
-
-def remover_produto(nome, quantidade):
-    """Remove certa quantidade do produto (se houver o suficiente)."""
-    global estoque_comida, estoque_bebida
-
-    if nome in estoque_comida:
-        estoque = estoque_comida
-    elif nome in estoque_bebida:
-        estoque = estoque_bebida
-    else:
-        print("Produto não encontrado.")
-        return
-
-    if estoque[nome] >= quantidade:
-        estoque[nome] -= quantidade
-        print(f"Foram removidas {quantidade} unidades de {nome}.")
-    else:
-        print(f"Quantidade insuficiente de {nome} no estoque.")
 
 
 def consultar_produto(nome):
-    """Mostra a quantidade atual de um produto específico."""
     if nome in estoque_comida:
-        print(f"{nome} (comida): {estoque_comida[nome]} unidades.")
+        print(f"A comida '{nome}' possui em estoque '{estoque_comida[nome]} unidades.'")
     elif nome in estoque_bebida:
-        print(f"{nome} (bebida): {estoque_bebida[nome]} unidades.")
+        print(f"A bebida '{nome}' possui em estoque '{estoque_bebida[nome]} unidades.'")
     else:
-        print("Produto não encontrado.")
+        print("O alimento informado não existe.")
+
 
 
 def repor_automatico():
-    """Aumenta em 5 unidades qualquer item com quantidade menor que 3."""
-    global estoque_comida, estoque_bebida
-    for estoque in (estoque_comida, estoque_bebida):
-        for produto in estoque:
-            if estoque[produto] < 3:
-                estoque[produto] += 5
-                print(f"{produto} foi reposto automaticamente (+5 unidades).")
+    for item, quantidade in estoque_comida.items():
+        if quantidade < 3:
+            estoque_comida[item] += 5
+    
+    for item, quantidade in estoque_bebida.items():
+        if quantidade < 3:
+            estoque_bebida[item] += 5
+
+    print("O estoque foi recarregado com sucesso.")
+
 
 
 def salvar_relatorio():
-    """Gera um arquivo 'estoque.txt' com os produtos e quantidades finais."""
-    global estoque_comida, estoque_bebida
-
     with open("estoque.txt", "w", encoding="utf-8") as arquivo:
-        arquivo.write("Relatório Final do Estoque\n\n")
+        arquivo.write("Relatório Final do Estoque\n")
 
         arquivo.write("Estoque de Comidas:\n")
-        for produto, quantidade in estoque_comida.items():
-            arquivo.write(f"{produto}: {quantidade}\n")
+        for item, quantidade in estoque_comida.items():
+            arquivo.write(f"{item}: {quantidade}\n")
 
         arquivo.write("\nEstoque de Bebidas:\n")
-        for produto, quantidade in estoque_bebida.items():
-            arquivo.write(f"{produto}: {quantidade}\n")
+        for item, quantidade in estoque_bebida.items():
+            arquivo.write(f"{item}: {quantidade}\n")
 
-        arquivo.write("\nRelatório gerado com sucesso.\n")
+    print("\nRelatório gerado com sucesso.\n")
 
-    print("Relatório salvo no arquivo 'estoque.txt'.")
 
 
 def menu():
-    """Menu principal do sistema."""
     while True:
         print("""
-Menu Principal
-1. Mostrar estoque
-2. Adicionar produto
-3. Remover produto
-4. Consultar produto
-5. Repor automático
-6. Sair e salvar relatório
-""")
+CANTINA
+              
+1. Adicionar um novo produto
+2. Remover um produto
+3. Consultar um produto
+4. Mostrar todos os produtos
+5. Repor estoque
+6. Salvar relatório e sair""")
 
-        opcao = input("Escolha uma opção: ")
+        try:
+            opcao = int(input("\nDigite uma opção: "))
+        except:
+            print("Opção inválida. Tente novamente.")
+            continue
 
-        if opcao == "1":
+        if opcao == 1:
+            alimento = input("Digite o nome do alimento que deseja adicionar: ")
+
+            while True:
+                try:
+                    quantidade = int(input("Digite a quantidade do alimento: "))
+
+                    adicionar_produto(alimento, quantidade)
+
+                    break
+                except:
+                    print("Quantidade inválida. Tente novamente.")     
+        elif opcao == 2:
+            alimento = input("Digite o nome do alimento que deseja remover: ")
+            
+            remover_produto(alimento)
+        elif opcao == 3:
+            alimento = input("Digite o nome do alimento que deseja consultar: ")
+
+            consultar_produto(alimento)
+        elif opcao == 4:
             mostrar_estoque()
-        elif opcao == "2":
-            nome = input("Nome do produto: ").lower()
-            quantidade = int(input("Quantidade a adicionar: "))
-            adicionar_produto(nome, quantidade)
-        elif opcao == "3":
-            nome = input("Nome do produto: ").lower()
-            quantidade = int(input("Quantidade a remover: "))
-            remover_produto(nome, quantidade)
-        elif opcao == "4":
-            nome = input("Nome do produto: ").lower()
-            consultar_produto(nome)
-        elif opcao == "5":
+        elif opcao == 5:
             repor_automatico()
-        elif opcao == "6":
+        elif opcao == 6:
             salvar_relatorio()
-            print("Saindo do sistema. Relatório salvo.")
+
+            print("Saindo...")
             break
         else:
-            print("Opção inválida, tente novamente.")
+            print("Opção inválida. Tente novamente.")
 
 menu()
+
