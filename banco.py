@@ -145,6 +145,7 @@ def main():
             banco.consultar_saldo(numero)
         elif opcao == "7":
             print("Saindo...")
+            break
         else:
             print("\nDigite uma opção válida!")
 
