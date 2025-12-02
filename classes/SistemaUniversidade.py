@@ -206,7 +206,3 @@ class SistemaUniversidade:
         
         for c in campus.cursos:
             print(c)
-
-if __name__ == "__main__":
-    app = SistemaUniversidade()
-    app.iniciar()
