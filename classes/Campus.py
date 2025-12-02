@@ -27,4 +27,4 @@ class Campus:
         return self.cursos
 
     def __str__(self):
-        return f"[Campus {self.codigo}] {self.nome} (Coord.: {self.coordenador}, CEP: {self.cep})"
+        return f"Campus {self.codigo}: {self.nome} - Coordenador: {self.coordenador}, CEP: {self.cep}"

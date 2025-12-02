@@ -1,78 +1,35 @@
-# 📘 Sistema Universitário – Gerenciamento de Cursos e Campus
+# 🏛️ Sistema de Gerenciamento Universitário
 
-Este projeto é um sistema simples em Python para gerenciar **Campus** e **Cursos** de uma instituição.
-Ele utiliza menus interativos no terminal e classes orientadas a objetos.
+Este é um sistema simples desenvolvido em **Python** para gerenciar uma estrutura universitária. O projeto utiliza conceitos de **Orientação a Objetos (POO)** para cadastrar cursos, criar campus e vincular cursos a unidades específicas.
 
----
+## 🚀 Como Executar
 
-## 🧱 Estrutura do Projeto
+Certifique-se de ter o **Python 3** instalado.
 
-* **Curso.py** → define a classe Curso
-* **Campus.py** → define a classe Campus
-* **main.py** → contém o menu principal e os submenus CRUD
+1.  Abra o terminal (ou prompt de comando) nessa pasta.
+2.  Execute o comando:
 
----
+<!-- end list -->
 
-## 🎯 Objetivo do Sistema
+```bash
+python main.py
+```
 
-O sistema permite:
+## ✨ Funcionalidades
 
-### ✔ Gerenciar Cursos
+O sistema possui um menu interativo com as seguintes opções:
 
-* Criar curso
-* Atualizar curso
-* Remover curso
-* Listar cursos
+### 1\. Gerenciar Cursos (Catálogo Geral)
 
-### ✔ Gerenciar Campus
+  * **Criar**: Adiciona um novo curso ao catálogo geral da universidade.
+  * **Atualizar**: Permite editar os dados de um curso existente.
+      * *Dica:* Ao editar, pressione `ENTER` em um campo vazio para manter o valor atual.
+  * **Listar**: Exibe todos os cursos cadastrados.
 
-* Criar campus
-* Atualizar campus
-* Remover campus
-* Listar campus
-* Adicionar cursos a um campus
-* Remover cursos do campus
-* Listar cursos do campus
+### 2\. Gerenciar Campus
 
----
-
-## 🧠 Conceitos Utilizados
-
-O projeto demonstra:
-
-* Programação **Orientada a Objetos (POO)**
-* Criação de **classes** e **métodos**
-* Associações entre objetos (um campus pode ter vários cursos)
-* Estruturas de repetição para menus interativos
-* Manipulação de listas em Python
-
----
-
-## 📚 Classes do Sistema
-
-### 🔹 Classe **Curso**
-
-Representa um curso da instituição.
-
-Atributos:
-
-* nome
-* duração
-* tipo (tecnólogo, bacharelado, etc.)
-* modalidade (presencial, EAD)
-
-### 🔹 Classe **Campus**
-
-Representa um campus físico.
-
-Atributos:
-
-* nome
-* código
-* coordenador
-* CEP
-* lista de cursos associados
-
-Métodos permitem adicionar, remover ou atualizar cursos dentro do campus.
-
----
+  * **Criar**: Adiciona um novo campus com código único.
+  * **Atualizar**: Edita dados do campus (Nome, Coordenador, CEP).
+  * **Listar**: Mostra os campus cadastrados.
+  * **Vincular Curso**: Adiciona um curso do catálogo geral para dentro de um campus específico (Relação de Composição/Agregação).
+  * **Ver Cursos do Campus**: Lista apenas os cursos ofertados naquela unidade.

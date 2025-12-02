@@ -6,4 +6,4 @@ class Curso:
         self.modalidade = modalidade
 
     def __str__(self):
-        return f"[Curso] {self.nome} (Tipo: {self.tipo}, Modalidade: {self.modalidade}, Duração: {self.duracao})"
+        return f"Curso: {self.nome} - Tipo: {self.tipo}, Modalidade: {self.modalidade}, Duração: {self.duracao}"
